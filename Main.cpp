@@ -1,5 +1,5 @@
-//программа подсчета суммы элементов массива,
-//с использованием многопоточности и без нее
+п»ї//РїСЂРѕРіСЂР°РјРјР° РїРѕРґСЃС‡РµС‚Р° СЃСѓРјРјС‹ СЌР»РµРјРµРЅС‚РѕРІ РјР°СЃСЃРёРІР°,
+//СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј РјРЅРѕРіРѕРїРѕС‚РѕС‡РЅРѕСЃС‚Рё Рё Р±РµР· РЅРµРµ
 #include <iostream>
 #include <thread>
 #include <Windows.h>
@@ -16,69 +16,69 @@ int main() {
     
     int N;
 
-    std::cout << "\n\t-----Многопоточная сортировка массива-----\n" << std::endl;
+    std::cout << "\n\t-----РњРЅРѕРіРѕРїРѕС‚РѕС‡РЅР°СЏ СЃРѕСЂС‚РёСЂРѕРІРєР° РјР°СЃСЃРёРІР°-----\n" << std::endl;
 
-    int M = coreNumber();//выводим на экран количество ядер процессора
-    int doubleTreadsNum = M * 2; //8 при 4-хядерном процессоре
-    int tenTreads = 10; //фиксированно 10 потоков 
+    int M = coreNumber();//РІС‹РІРѕРґРёРј РЅР° СЌРєСЂР°РЅ РєРѕР»РёС‡РµСЃС‚РІРѕ СЏРґРµСЂ РїСЂРѕС†РµСЃСЃРѕСЂР°
+    int doubleTreadsNum = M * 2; //8 РїСЂРё 4-С…СЏРґРµСЂРЅРѕРј РїСЂРѕС†РµСЃСЃРѕСЂРµ
+    int tenTreads = 10; //С„РёРєСЃРёСЂРѕРІР°РЅРЅРѕ 10 РїРѕС‚РѕРєРѕРІ 
 
-    std::cout << "\nВведите размер массива: ";
+    std::cout << "\nР’РІРµРґРёС‚Рµ СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР°: ";
     std::cin >> N;
     std::cin.clear();
 
     Array array(N, M);
 
-    array.generateArray(N);//создаем массив и заполняем его
-    //array.showArray(); //с большими массивами лучше не использовать
+    array.generateArray(N);//СЃРѕР·РґР°РµРј РјР°СЃСЃРёРІ Рё Р·Р°РїРѕР»РЅСЏРµРј РµРіРѕ
+    //array.showArray(); //СЃ Р±РѕР»СЊС€РёРјРё РјР°СЃСЃРёРІР°РјРё Р»СѓС‡С€Рµ РЅРµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ
 
-    std::cout << "\n\t-----Подсчет суммы элементов массива в одном потоке-----" << std::endl;
+    std::cout << "\n\t-----РџРѕРґСЃС‡РµС‚ СЃСѓРјРјС‹ СЌР»РµРјРµРЅС‚РѕРІ РјР°СЃСЃРёРІР° РІ РѕРґРЅРѕРј РїРѕС‚РѕРєРµ-----" << std::endl;
     
     auto start1 = std::chrono::high_resolution_clock::now();
     int totalSum = array.sumArray();
     auto end1 = std::chrono::high_resolution_clock::now();
 
-    // Выводим результат и время выполнения
-    std::cout << "\nИтог суммирования: " << totalSum << std::endl;
+    // Р’С‹РІРѕРґРёРј СЂРµР·СѓР»СЊС‚Р°С‚ Рё РІСЂРµРјСЏ РІС‹РїРѕР»РЅРµРЅРёСЏ
+    std::cout << "\nРС‚РѕРі СЃСѓРјРјРёСЂРѕРІР°РЅРёСЏ: " << totalSum << std::endl;
     auto duration1 = std::chrono::duration_cast<std::chrono::microseconds>(end1 - start1);
-    std::cout << "Метод выполнялся: " << duration1.count() << " микросекунд\n" << std::endl;
+    std::cout << "РњРµС‚РѕРґ РІС‹РїРѕР»РЅСЏР»СЃСЏ: " << duration1.count() << " РјРёРєСЂРѕСЃРµРєСѓРЅРґ\n" << std::endl;
     
-    std::cout << "\n\t-----Подсчет суммы элементов массива в " << M << " потоках-----" << std::endl;
+    std::cout << "\n\t-----РџРѕРґСЃС‡РµС‚ СЃСѓРјРјС‹ СЌР»РµРјРµРЅС‚РѕРІ РјР°СЃСЃРёРІР° РІ " << M << " РїРѕС‚РѕРєР°С…-----" << std::endl;
 
     auto start2 = std::chrono::high_resolution_clock::now();
     int totalSumWithThreads = array.sumArrayWithThreads();
     auto end2 = std::chrono::high_resolution_clock::now();
 
-    std::cout << "\nИтог суммирования: " << totalSumWithThreads << std::endl;
+    std::cout << "\nРС‚РѕРі СЃСѓРјРјРёСЂРѕРІР°РЅРёСЏ: " << totalSumWithThreads << std::endl;
     auto duration2 = std::chrono::duration_cast<std::chrono::microseconds>(end2 - start2);
-    std::cout << "Метод выполнялся: " << duration2.count() << " микросекунд\n" << std::endl;
+    std::cout << "РњРµС‚РѕРґ РІС‹РїРѕР»РЅСЏР»СЃСЏ: " << duration2.count() << " РјРёРєСЂРѕСЃРµРєСѓРЅРґ\n" << std::endl;
     
-    std::cout << "\n\t-----Подсчет суммы элементов массива в " << doubleTreadsNum << " потоках-----" << std::endl;
+    std::cout << "\n\t-----РџРѕРґСЃС‡РµС‚ СЃСѓРјРјС‹ СЌР»РµРјРµРЅС‚РѕРІ РјР°СЃСЃРёРІР° РІ " << doubleTreadsNum << " РїРѕС‚РѕРєР°С…-----" << std::endl;
 
     auto start3 = std::chrono::high_resolution_clock::now();
     int totalSumWithDoubleThreads = array.sumArrayWithMultipleThreads(doubleTreadsNum);
     auto end3 = std::chrono::high_resolution_clock::now();
 
-    std::cout << "\nИтог суммирования: " << totalSumWithDoubleThreads << std::endl;
+    std::cout << "\nРС‚РѕРі СЃСѓРјРјРёСЂРѕРІР°РЅРёСЏ: " << totalSumWithDoubleThreads << std::endl;
     auto duration3 = std::chrono::duration_cast<std::chrono::microseconds>(end3 - start3);
-    std::cout << "Метод выполнялся: " << duration3.count() << " микросекунд\n" << std::endl;
+    std::cout << "РњРµС‚РѕРґ РІС‹РїРѕР»РЅСЏР»СЃСЏ: " << duration3.count() << " РјРёРєСЂРѕСЃРµРєСѓРЅРґ\n" << std::endl;
 
-    std::cout << "\n\t-----Подсчет суммы элементов массива в " << tenTreads << " потоках-----" << std::endl;
+    std::cout << "\n\t-----РџРѕРґСЃС‡РµС‚ СЃСѓРјРјС‹ СЌР»РµРјРµРЅС‚РѕРІ РјР°СЃСЃРёРІР° РІ " << tenTreads << " РїРѕС‚РѕРєР°С…-----" << std::endl;
 
     auto start4 = std::chrono::high_resolution_clock::now();
     int totalSumWithTenThreads = array.sumArrayWithMultipleThreads(tenTreads);
     auto end4 = std::chrono::high_resolution_clock::now();
 
-    std::cout << "\nИтог суммирования: " << totalSumWithTenThreads << std::endl;
+    std::cout << "\nРС‚РѕРі СЃСѓРјРјРёСЂРѕРІР°РЅРёСЏ: " << totalSumWithTenThreads << std::endl;
     auto duration4 = std::chrono::duration_cast<std::chrono::microseconds>(end4 - start4);
-    std::cout << "Метод выполнялся: " << duration4.count() << " микросекунд\n" << std::endl;
+    std::cout << "РњРµС‚РѕРґ РІС‹РїРѕР»РЅСЏР»СЃСЏ: " << duration4.count() << " РјРёРєСЂРѕСЃРµРєСѓРЅРґ\n" << std::endl;
 
-    //табличка с результатами
-    std::cout << "\n\nРезультат вычисления суммы элементов для массива размером " << N << ",\nна "<< M <<"-ядерном процессоре:\n" << std::endl;
+    //С‚Р°Р±Р»РёС‡РєР° СЃ СЂРµР·СѓР»СЊС‚Р°С‚Р°РјРё
+    std::cout << "\n\nР РµР·СѓР»СЊС‚Р°С‚ РІС‹С‡РёСЃР»РµРЅРёСЏ СЃСѓРјРјС‹ СЌР»РµРјРµРЅС‚РѕРІ РґР»СЏ РјР°СЃСЃРёРІР° СЂР°Р·РјРµСЂРѕРј " << N << ",\nРЅР° "<< M <<"-СЏРґРµСЂРЅРѕРј РїСЂРѕС†РµСЃСЃРѕСЂРµ:\n" << std::endl;
 
     std::cout << "+---------------+---------------+" << std::endl;
 
-    std::cout << "|" << std::left << std::setw(15) << "Потоки"<< "|"
-        << std::right << std::setw(15) << "Время (мкс)" << "|"
+    std::cout << "|" << std::left << std::setw(15) << "РџРѕС‚РѕРєРё"<< "|"
+        << std::right << std::setw(15) << "Р’СЂРµРјСЏ (РјРєСЃ)" << "|"
         << std::endl;
     std::cout << "+---------------+---------------+" << std::endl;
     std::cout << "|" << std::left << std::setw(15) << "1" << "|"

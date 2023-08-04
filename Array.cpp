@@ -1,4 +1,4 @@
-#include "Array.h"
+п»ї#include "Array.h"
 
 void Array::calculateSum(int start, int end)
 {
@@ -13,10 +13,10 @@ void Array::calculateSum(int start, int end)
 void Array::generateArray(int N)
 {
     _array.clear();
-    std::srand(static_cast<unsigned int>(std::time(nullptr))); //генератор случайных чисел
+    std::srand(static_cast<unsigned int>(std::time(nullptr))); //РіРµРЅРµСЂР°С‚РѕСЂ СЃР»СѓС‡Р°Р№РЅС‹С… С‡РёСЃРµР»
 
     for (int i = 0; i < N; ++i) {
-        int randomNumber = std::rand() % 10; // Случайное число от 0 до 9
+        int randomNumber = std::rand() % 10; // РЎР»СѓС‡Р°Р№РЅРѕРµ С‡РёСЃР»Рѕ РѕС‚ 0 РґРѕ 9
         _array.push_back(randomNumber);
     }
 }

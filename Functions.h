@@ -1,18 +1,18 @@
-//вспомогательные функции
+п»ї//РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Рµ С„СѓРЅРєС†РёРё
 #pragma once
 #include <iostream>
 #include <thread>
 
-int coreNumber() //вывод на экран количества ядер CPU
+int coreNumber() //РІС‹РІРѕРґ РЅР° СЌРєСЂР°РЅ РєРѕР»РёС‡РµСЃС‚РІР° СЏРґРµСЂ CPU
 {
-    std::cout << "\nВычисляем количество ядер CPU..." << std::endl;
+    std::cout << "\nР’С‹С‡РёСЃР»СЏРµРј РєРѕР»РёС‡РµСЃС‚РІРѕ СЏРґРµСЂ CPU..." << std::endl;
     int numCores = std::thread::hardware_concurrency();
     if (numCores > 0) {
-        std::cout << "\nКоличество ядер CPU: " << numCores << std::endl;
+        std::cout << "\nРљРѕР»РёС‡РµСЃС‚РІРѕ СЏРґРµСЂ CPU: " << numCores << std::endl;
         return numCores;
     }
     else {
-        std::cout << "\nОШИБКА: вычисления количества ядер CPU\n" << std::endl;
+        std::cout << "\nРћРЁРР‘РљРђ: РІС‹С‡РёСЃР»РµРЅРёСЏ РєРѕР»РёС‡РµСЃС‚РІР° СЏРґРµСЂ CPU\n" << std::endl;
         return 0;
     }
 }
